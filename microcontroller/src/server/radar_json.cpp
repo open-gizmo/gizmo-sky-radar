@@ -44,7 +44,7 @@ namespace {
 }
 
 // Write the aircraft around the radar
-void writeNearbyAircraft(JsonObject result, size_t limit, bool includeTrails) {
+void writeNearbyAircraft(JsonObject result) {
 	const RadarSettings settings = getRadarSettings();
 	AircraftTracker *tracker = getWebTracker();
 	FlightDataState state;
@@ -62,20 +62,8 @@ void writeNearbyAircraft(JsonObject result, size_t limit, bool includeTrails) {
 
 	// The aircraft, nearest first
 	JsonArray aircraft = result["aircraft"].to<JsonArray>();
-	const size_t count = tracker == nullptr ? 0 : (tracker->count < limit ? tracker->count : limit);
+	const size_t count = tracker == nullptr ? 0 : tracker->count;
 	for (size_t index = 0; index < count; index++) {
-		writeAircraftToJson(aircraft.add<JsonObject>(), *tracker, tracker->items[index], nowMs, settings.rangeKm, includeTrails);
+		writeAircraftToJson(aircraft.add<JsonObject>(), *tracker, tracker->items[index], nowMs, settings.rangeKm, true);
 	}
-}
-
-// Write the status of the radar
-void writeRadarStatus(JsonObject result) {
-	const RadarSettings settings = getRadarSettings();
-	FlightDataState state;
-	readFlightState(state);
-
-	// Its settings (location, range, units and display), then the state of its data
-	writeSettingsToJson(result, settings);
-	writeDataState(result, state);
-	result["dataSource"] = "adsb.fi";
 }

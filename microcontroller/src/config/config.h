@@ -4,14 +4,14 @@
 #include <ESPAsyncWebServer.h>
 #include "radar_settings.h"
 
-// Project name, shown by the device API, the web app and the display, and its machine name (the mDNS hostname and the MCP server name)
+// Project name, shown by the device API, the web app and the display, and its machine name (the mDNS hostname)
 constexpr const char *PROJECT_NAME = "Gizmo Sky Radar";
 constexpr const char *PROJECT_ID = "gizmo-sky-radar";
 
 // Name of the open setup hotspot (shown on the display too)
 constexpr const char *ACCESS_POINT_NAME = "Gizmo-Sky-Radar";
 
-// Firmware version shown in the web app and to MCP clients (the release build sets it)
+// Firmware version shown in the web app (the release build sets it)
 #ifndef PIO_FIRMWARE_VERSION
 #define PIO_FIRMWARE_VERSION "dev"
 #endif

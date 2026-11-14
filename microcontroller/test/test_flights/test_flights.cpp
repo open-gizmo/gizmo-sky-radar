@@ -287,7 +287,7 @@ void test_writes_the_aircraft_json() {
 	TEST_ASSERT_EQUAL_UINT(1, doc["trail"].size());
 	TEST_ASSERT_DOUBLE_WITHIN(0.00001, 9.2, doc["trail"][0][1].as<double>());
 
-	// Without the trail, for the agents
+	// Without the trail
 	doc.clear();
 	writeAircraftToJson(doc.to<JsonObject>(), tracker, tracker.items[0], 12000, 2, false);
 	TEST_ASSERT_TRUE(doc["trail"].isNull());

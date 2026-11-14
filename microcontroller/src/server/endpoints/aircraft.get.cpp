@@ -1,6 +1,5 @@
 #include "../server.h"
 #include <ArduinoJson.h>
-#include "../../flights/aircraft.h"
 
 // Get the aircraft around the radar, nearest first, with their trails (the web app polls it)
 void setupAircraftGetRoute() {
@@ -15,7 +14,7 @@ void setupAircraftGetRoute() {
 		doc["errorId"] = nullptr;
 		doc["errorMessage"] = nullptr;
 		JsonObject data = doc["data"].to<JsonObject>();
-		writeNearbyAircraft(data, MAX_AIRCRAFT, true);
+		writeNearbyAircraft(data);
 		AsyncResponseStream *response = request->beginResponseStream("application/json");
 		response->addHeader("Cache-Control", "no-store");
 		serializeJson(doc, *response);

@@ -10,7 +10,6 @@ void setupRoutes() {
 	setupSettingsPostRoute();
 	setupResetSettingsPostRoute();
 	setupAircraftGetRoute();
-	setupMcpRoute();
 	setupAgentGuideRoute();
 	setupCaptivePortalRoute();
 }

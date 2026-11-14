@@ -3,7 +3,6 @@ import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import Airplane01Icon from '@hugeicons/core-free-icons/Airplane01Icon';
 import AirplaneTakeOff01Icon from '@hugeicons/core-free-icons/AirplaneTakeOff01Icon';
 import Alert02Icon from '@hugeicons/core-free-icons/Alert02Icon';
-import BookOpen01Icon from '@hugeicons/core-free-icons/BookOpen01Icon';
 import Compass01Icon from '@hugeicons/core-free-icons/Compass01Icon';
 import DashboardSpeed01Icon from '@hugeicons/core-free-icons/DashboardSpeed01Icon';
 import HashIcon from '@hugeicons/core-free-icons/HashIcon';
@@ -12,7 +11,6 @@ import Location01Icon from '@hugeicons/core-free-icons/Location01Icon';
 import MountainIcon from '@hugeicons/core-free-icons/MountainIcon';
 import Navigation03Icon from '@hugeicons/core-free-icons/Navigation03Icon';
 import RefreshIcon from '@hugeicons/core-free-icons/RefreshIcon';
-import RoboticIcon from '@hugeicons/core-free-icons/RoboticIcon';
 import Tag01Icon from '@hugeicons/core-free-icons/Tag01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Alert, AlertDescription, AlertTitle } from '@brumaombra/ui-vintage/alert';
@@ -109,12 +107,6 @@ const legend = computed(() => {
     return [{ color: GROUND_COLOR, label: t('pages.radar.legendGround') }, ...bands];
 });
 
-// Address of the MCP server, as this browser reached the device (an agent on the same network uses the same one)
-const mcpUrl = computed(() => `${window.location.origin}/mcp`);
-
-// Help under the agents group: the command that adds the radar to Claude Code
-const agentsHint = computed(() => t('pages.radar.agents.hint', { command: `claude mcp add --transport http gizmo-sky-radar ${mcpUrl.value}` }));
-
 // Pick an aircraft (from the radar: its details show under it; from the list: they open in a dialog)
 const handleRadarSelect = hex => {
     selectedHex.value = hex;
@@ -127,11 +119,6 @@ const handleListSelect = hex => {
 // Open the aircraft on the adsb.fi map
 const handleTrackerPress = () => {
     window.open(buildTrackerUrl(selectedHex.value), '_blank', 'noopener');
-};
-
-// Open the guide for AI agents in a new tab
-const handleAgentGuidePress = () => {
-    window.open('/llms.txt', '_blank', 'noopener');
 };
 
 // Read the aircraft, then again every few seconds while the page is open (a failure keeps the last ones on screen)
@@ -255,12 +242,6 @@ definePageMeta({
                 </ListRow>
             </ListGroup>
         </template>
-
-        <!-- AI agents: the MCP server and the guide they read -->
-        <ListGroup :title="t('pages.radar.agents.title')" :hint="agentsHint">
-            <ListRow :label="t('pages.radar.agents.mcpLabel')" :icon="RoboticIcon" :value="mcpUrl" wrap-value />
-            <ListRow :label="t('pages.radar.agents.guideLabel')" :icon="BookOpen01Icon" action @click="handleAgentGuidePress" />
-        </ListGroup>
 
         <!-- Details of an aircraft -->
         <ResponsiveDialog v-model:open="isDetailsOpen" :title="selectedAircraft ? getAircraftName(selectedAircraft) : t('pages.radar.detailsAction')" :description="selectedAircraft ? t('pages.radar.details.hex', { hex: selectedAircraft.hex.toUpperCase() }) : t('pages.radar.details.gone')">

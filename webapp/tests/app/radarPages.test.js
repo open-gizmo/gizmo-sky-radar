@@ -87,7 +87,7 @@ afterEach(() => {
     vi.restoreAllMocks();
 });
 
-// Radar page: the live sky, the list and the agents
+// Radar page: the live sky and the list
 describe('radar page', () => {
     // The aircraft are drawn and listed, nearest first, with the state of the data
     it('shows the aircraft around the radar', async () => {
@@ -116,15 +116,6 @@ describe('radar page', () => {
         const wrapper = await mountSuspended(RadarPage);
         await vi.waitFor(() => expect(wrapper.text()).toContain('Flight data problem'));
         expect(wrapper.text()).toContain('No answer from adsb.fi');
-        wrapper.unmount();
-    });
-
-    // Agents connect through the MCP server at the address the browser used, and the page says how
-    it('shows how to connect an AI agent', async () => {
-        const wrapper = await mountSuspended(RadarPage);
-        await vi.waitFor(() => expect(wrapper.text()).toContain('AI agents'));
-        const mcpUrl = `${window.location.origin}/mcp`;
-        expect(wrapper.text()).toContain(`claude mcp add --transport http gizmo-sky-radar ${mcpUrl}`);
         wrapper.unmount();
     });
 });

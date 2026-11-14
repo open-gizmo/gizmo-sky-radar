@@ -15,7 +15,7 @@ Gizmo Sky Radar is a two-part project that turns a Seeed Studio XIAO ESP32-S3 an
 </p>
 
 <p>
-  📡 Live ADS-B data from adsb.fi • 🟢 Animated radar on a round display • ✈️ Smooth motion between updates • 🎨 Three themes • 🤖 MCP server for AI agents • 📱 Wi-Fi setup from the phone • 🌍 EN/IT UI
+  📡 Live ADS-B data from adsb.fi • 🟢 Animated radar on a round display • ✈️ Smooth motion between updates • 🎨 Three themes • 📱 Wi-Fi setup from the phone • 🌍 EN/IT UI
 </p>
 
 <p>
@@ -40,7 +40,7 @@ Look up when a plane flies over and you probably wonder where it's going. Gizmo 
 
 You set the location once, from your phone, and pick how far the radar looks: from 5 km, where you see the helicopters and the small planes over your neighborhood, to 150 km, a whole region of airliners. Every 5 seconds the radar downloads the aircraft around that point from [adsb.fi](https://adsb.fi), a community network of ADS-B receivers, and between two downloads it moves each one along its track, so they glide instead of jumping. Every few seconds a spotlight moves to one of the nearest aircraft and the bottom of the screen tells you what it is, how high and how fast it flies, and how far away it is.
 
-The web app built into the firmware shows the same radar, live, with the list of the nearest aircraft and the details of each one. AI agents get the radar as an MCP server: they connect to it and call `get_nearby_aircraft` to know what is flying around you.
+The web app built into the firmware shows the same radar, live, with the list of the nearest aircraft and the details of each one.
 
 <a id="images"></a>
 ## 🖼️ Images
@@ -79,7 +79,7 @@ The web app built into the firmware shows the same radar, live, with the list of
 - Screens for every state: a boot animation, the Wi-Fi setup, the connection, a radar without a location, and the countdown of the factory reset.
 - Downloads in a task of their own, so the display never waits for the network, with a growing pause after failures and a warning on screen when the data gets old.
 - A small HTTP API (`/api/aircraft`, `/api/config`, `/api/settings`) that scripts and other devices can call directly.
-- An MCP server at `/mcp` for AI agents (Claude Code and other MCP clients), with `get_nearby_aircraft` and `get_radar_status`, and a Markdown guide for agents at `/llms.txt`.
+- A Markdown guide for AI agents at `/llms.txt`, describing the API with the address of the radar filled in.
 - Nuxt 4 interface with the live radar, the list of the nearest aircraft and their details, built on the `@brumaombra/ui-vintage` UI system.
 - English and Italian localization.
 - Captive-portal setup flow in AP mode and `gizmo-sky-radar.local` hostname access after joining Wi-Fi. The API only answers the dashboard's own page and direct requests (scripts, `curl`), under the radar's own name or address, and through the setup hotspot only the Wi-Fi setup.
@@ -100,7 +100,7 @@ Gizmo Sky Radar is built around three cooperating parts:
 1. Every 5 seconds, a task of the firmware asks adsb.fi for the aircraft within a radius a bit larger than the range (`https://opendata.adsb.fi/api/v3/lat/{lat}/lon/{lon}/dist/{nm}`).
 2. It reads the answer into the PSRAM, keeps the fields the radar uses, and hands the nearest 64 aircraft to the tracker, which keeps their trails and holds on to the ones that miss a download for a while.
 3. The display copies the tracker about 25 times a second, moves each aircraft on from its last position along its track, and draws the frame.
-4. The web app reads the same aircraft from `GET /api/aircraft` every 5 seconds and moves them on the same way. An AI agent asks the MCP server, which answers from the same data.
+4. The web app reads the same aircraft from `GET /api/aircraft` every 5 seconds and moves them on the same way.
 
 <a id="quick-start"></a>
 ## 🚀 Quick Start
@@ -210,7 +210,7 @@ The firmware is responsible for the runtime behavior of the physical radar.
 - Connects the ESP32-S3 to Wi-Fi, and opens a setup hotspot when there is no working network.
 - Downloads the aircraft around the location from adsb.fi every 5 seconds, in a task of its own.
 - Follows the aircraft across downloads, with their trails, and moves them on between downloads.
-- Hosts the embedded HTTP server, the radar API and the MCP server.
+- Hosts the embedded HTTP server and the radar API.
 - Saves the settings in the flash, and forgets them (and the Wi-Fi) on a factory reset.
 
 ### 🧩 Firmware Layers
@@ -221,14 +221,14 @@ The firmware is split into focused modules under `microcontroller/src/`:
 - 💾 `storage/` saves the settings with `Preferences`.
 - ✈️ `flights/` downloads the flight data in its own task (`flights.*`), and keeps hardware-free the parser of the readsb JSON (`aircraft_parser.*`), the tracker with the trails and the dead reckoning (`aircraft_tracker.*`), the download schedule (`fetch_schedule.*`), the geography (`geo.*`) and the JSON of an aircraft (`aircraft_json.*`).
 - 🟢 `display/` drives the GC9A01 (`panel.h`), picks the screen (`display.*`), draws the radar (`radar_view.*`) with the colors of `theme.*`, and writes the numbers in the units of the user (`units.*`, hardware-free).
-- 🤖 `mcp/` is the MCP server (`mcp_protocol.*`) and the guide for agents (`agent_guide.*`), both hardware-free.
-- 🌐 `server/` exposes the embedded HTTP routes (`/api/config`, `/api/settings`, `/api/reset-settings`, `/api/aircraft`, `/mcp`, `/llms.txt`, and the web app).
+- 📖 `guide/` writes the Markdown guide for AI agents (`agent_guide.*`), hardware-free.
+- 🌐 `server/` exposes the embedded HTTP routes (`/api/config`, `/api/settings`, `/api/reset-settings`, `/api/aircraft`, `/llms.txt`, and the web app).
 - 🧾 `serial/` turns on the serial log in the debug build.
 - 🔌 `wifi/` gives the radar's names to the shared Wi-Fi setup, and tells the display how the connection is doing.
 
 ### 🧪 Tests
 
-The hardware-free logic (the settings, the parser, the tracker, the download schedule, the geography, the units, the MCP server and the guide for agents) is tested on your computer, no board needed:
+The hardware-free logic (the settings, the parser, the tracker, the download schedule, the geography, the units and the guide for agents) is tested on your computer, no board needed:
 
 ```bash
 cd microcontroller
@@ -255,13 +255,12 @@ The Nuxt app provides the browser-based setup and the live radar.
 - Shows the radar live, like the display, with the beam, the trails and the labels, the aircraft moving on between reads; tap one to see its details.
 - Lists the nearest aircraft with their type, altitude, distance and direction, and opens each one on the adsb.fi map.
 - Sets the location, the range, the units, the theme, the brightness, the rotation and what the display shows.
-- Shows the MCP address of the radar and the command to add it to Claude Code, and links to the guide for agents.
 - Lets users configure Wi-Fi, restart the device, and reset its settings.
 - Supports English and Italian localization.
 - Uses the `@brumaombra/ui-vintage` package for the shared design system.
 - Keeps device API helpers and radar state in `webapp/app/composables/`.
 - Uses static generation for the embedded web UI bundle that is packaged into firmware assets.
-- During development (`npm run dev`), a mock device in `webapp/server/` answers like the firmware, with a simulated sky over Milan (and one aircraft squawking 7700, to show how an emergency looks). It includes the MCP server, so you can work on agents without the board.
+- During development (`npm run dev`), a mock device in `webapp/server/` answers like the firmware, with a simulated sky over Milan (and one aircraft squawking 7700, to show how an emergency looks).
 
 #### 🎨 UI System
 
@@ -318,30 +317,9 @@ curl "http://gizmo-sky-radar.local/api/aircraft"
 
 Each aircraft has its `hex` (ICAO address), `callsign`, `registration`, `type`, `description`, `squawk`, `latitude` and `longitude` with their `positionAgeSeconds`, `onGround`, `altitudeFt`, `groundSpeedKt`, `trackDegrees`, `verticalRateFpm`, `emergency`, its `distanceKm` and `bearingDegrees` from the radar, `inRange`, and `missing` when it wasn't in the last download. The `status` of the data is `live`, `loading`, `stale`, `error`, `waiting_for_network` or `no_location`. Errors are JSON, in the format of every OpenGizmo device: `{ "errorId": "invalid_settings_field", "errorMessage": "rangeKm", "data": null }`.
 
-### MCP server for AI agents
-
-The radar is a [Model Context Protocol](https://modelcontextprotocol.io) server, with the Streamable HTTP transport at `http://gizmo-sky-radar.local/mcp`. Add it to Claude Code with:
-
-```sh
-claude mcp add --transport http gizmo-sky-radar http://gizmo-sky-radar.local/mcp
-```
-
-Use the radar's IP address instead of `gizmo-sky-radar.local` if your computer doesn't resolve mDNS names. The radar page of the web app shows the exact address and command.
-
-No board at hand? The web app's development server has the same MCP server, with the simulated sky. Start it with `npm run dev` in `webapp/`, then add it with `claude mcp add --transport http gizmo-sky-radar-dev http://localhost:3000/mcp`.
-
-| Tool | What it does |
-| --- | --- |
-| `get_nearby_aircraft` | The aircraft around the radar, nearest first, as structured content and as JSON text. Optional argument: `limit` (1 to 64, 15 by default). |
-| `get_radar_status` | The location, the range, the settings and the state of the flight data. |
-
-- The server speaks the current 2026-07-28 revision of MCP (stateless, with the version in each request) and the earlier ones that open with `initialize` (2025-11-25, 2025-06-18, 2025-03-26), which most clients still use.
-- Every answer is plain JSON: no event streams and no sessions, so `GET` and `DELETE` on `/mcp` answer `405`.
-- Like the rest of the API, the MCP server only answers on the radar's own name or address, refuses other websites (`Origin`), and has no authentication: anyone on your network can use it. Don't expose it to the internet.
-
 ### Guide for AI agents
 
-The radar describes itself in Markdown for agents that read before they connect: how to use the MCP server, the plain HTTP API, and tips, with the address the agent used already filled in. It is served at `/llms.txt`, at `/` to clients whose `Accept` header asks for `text/markdown` before `text/html` (browsers still get the web app), and every page of the web app links to it with `<link rel="alternate" type="text/markdown">`.
+The radar describes itself in Markdown for agents that read before they connect: the HTTP API and tips, with the address the agent used already filled in. It is served at `/llms.txt`, at `/` to clients whose `Accept` header asks for `text/markdown` before `text/html` (browsers still get the web app), and every page of the web app links to it with `<link rel="alternate" type="text/markdown">`.
 
 ### Flight data
 
@@ -367,7 +345,6 @@ Hold the **BOOT** button of the XIAO for 10 seconds while the radar runs: the di
 - `microcontroller/src/flights/flights.cpp` for the downloads.
 - `microcontroller/src/flights/aircraft_tracker.cpp` for the trails and the dead reckoning.
 - `microcontroller/src/config/radar_settings.cpp` for the settings, their limits and their validation.
-- `microcontroller/src/mcp/mcp_protocol.cpp` for the MCP server: its versions, tools and errors.
 - `webapp/app/components/RadarScope.vue` for the radar of the web app.
 - `webapp/app/composables/useDeviceApi.js` for browser-to-device communication.
 
@@ -394,7 +371,6 @@ The workflow only runs on `main`, and needs these secrets, on the repository or 
 - "CLEAR SKY" for a long time: there may really be no traffic, or no ADS-B receiver near you. Try a larger range.
 - The web UI does not open after joining Wi-Fi: make sure your phone or computer is on the same network as the radar and try the `gizmo-sky-radar.local` hostname if your router supports mDNS, or the IP address shown by your router.
 - The flasher can't connect to the board: try another USB cable (some only charge), and use the BOOT and RESET buttons to enter flashing mode by hand (see [Quick Start](#quick-start)).
-- An AI agent can't connect to the MCP server: check that the computer running the agent is on the same network as the radar, and use the radar's IP address in the MCP URL if `gizmo-sky-radar.local` doesn't resolve there. Agents in the cloud (for example connectors added on claude.ai) can't reach a radar on your home network.
 - The AP setup flow never appears: power-cycle the device and check the firmware logs (the `debug` build profile) for Wi-Fi connection errors.
 
 <a id="license"></a>

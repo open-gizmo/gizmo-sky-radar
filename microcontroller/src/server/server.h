@@ -16,18 +16,14 @@ void setupConfigGetRoute();
 void setupSettingsPostRoute();
 void setupResetSettingsPostRoute();
 void setupAircraftGetRoute();
-void setupMcpRoute();
 void setupAgentGuideRoute();
 void setupCaptivePortalRoute();
 
 // Send the guide for AI agents (Markdown)
 void sendAgentGuide(AsyncWebServerRequest *request);
 
-// Write the aircraft around the radar (the center, the state of the data, then the aircraft nearest first, up to limit), for the web API and the MCP server
-void writeNearbyAircraft(JsonObject result, size_t limit, bool includeTrails);
-
-// Write the status of the radar: its location, its range, its settings and the state of its data
-void writeRadarStatus(JsonObject result);
+// Write the aircraft around the radar: the center, the state of the data, then the aircraft nearest first, with their trails
+void writeNearbyAircraft(JsonObject result);
 
 // Server setup
 void setupRoutes();

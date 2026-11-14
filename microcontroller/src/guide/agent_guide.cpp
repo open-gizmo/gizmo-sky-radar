@@ -11,28 +11,9 @@ namespace {
 
 A plane radar on the local network: an ESP32-S3 with a round display that shows the aircraft flying around a location its owner set. The flight data comes from adsb.fi, a community network of ADS-B receivers, and is refreshed every 5 seconds.
 
-## Connect over MCP (recommended)
+## HTTP API
 
-The radar is a Model Context Protocol server, with Streamable HTTP at:
-
-```
-http://{host}/mcp
-```
-
-With Claude Code:
-
-```sh
-claude mcp add --transport http gizmo-sky-radar http://{host}/mcp
-```
-
-Tools:
-
-- `get_nearby_aircraft`: the aircraft around the radar right now, nearest first. Optional argument `limit` (1 to 64, default 15). Each aircraft has its callsign, registration, type, altitude (feet), ground speed (knots), track, vertical rate (feet per minute), squawk, distance (km) and bearing from the radar, and `inRange` when it is inside the range the display shows.
-- `get_radar_status`: the location, the range, the display settings, and when the flight data was last downloaded (or why it failed).
-
-## Plain HTTP
-
-Without MCP, the same radar answers plain requests:
+The radar answers plain HTTP requests on the local network:
 
 - `GET http://{host}/api/aircraft` returns the aircraft as JSON, nearest first, with the center of the radar and the age of the data.
 - `GET http://{host}/api/config` returns the settings of the radar as JSON.
@@ -43,11 +24,12 @@ curl "http://{host}/api/aircraft"
 
 ## Tips
 
-- The radar shows nothing until its owner sets a location in its web app: `get_radar_status` says whether it has one.
+- The radar shows nothing until its owner sets a location in its web app: `hasLocation` in `/api/config` says whether it has one, and the `status` of `/api/aircraft` is then `no_location`.
 - Aircraft without a callsign are named by their registration or their ICAO address (`hex`).
-- Altitudes are barometric, in feet; `onGround` aircraft are taxiing or parked.
+- Altitudes are barometric, in feet, speeds in knots, distances in kilometers; `onGround` aircraft are taxiing or parked.
+- The data is a few seconds old: move an aircraft on along `trackDegrees` at `groundSpeedKt` for `positionAgeSeconds` to know where it is now. Read it again to follow the aircraft.
 - An `emergency` aircraft squawks 7500 (hijack), 7600 (radio failure) or 7700 (emergency), or reports one.
-- Errors of the plain API are JSON: `{ "errorId": "...", "errorMessage": "...", "data": null }`.
+- Errors of the API are JSON: `{ "errorId": "...", "errorMessage": "...", "data": null }`.
 - The radar only answers on its local network, and without authentication: anyone on that network can read it.
 )";
 

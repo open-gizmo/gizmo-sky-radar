@@ -69,12 +69,6 @@
                 "distance": "Distance",
                 "squawk": "Squawk",
                 "trackerAction": "Open on the adsb.fi map"
-            },
-            "agents": {
-                "title": "AI agents",
-                "mcpLabel": "MCP server",
-                "guideLabel": "Guide for agents",
-                "hint": "AI agents on this network can ask the radar what is flying around. To add it to Claude Code, run: {command}"
             }
         },
         "settings": {

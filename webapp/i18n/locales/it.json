@@ -69,12 +69,6 @@
                 "distance": "Distanza",
                 "squawk": "Squawk",
                 "trackerAction": "Apri sulla mappa di adsb.fi"
-            },
-            "agents": {
-                "title": "Agenti IA",
-                "mcpLabel": "Server MCP",
-                "guideLabel": "Guida per gli agenti",
-                "hint": "Gli agenti IA su questa rete possono chiedere al radar cosa sta volando qui intorno. Per aggiungerlo a Claude Code, esegui: {command}"
             }
         },
         "settings": {

@@ -2,7 +2,7 @@
 #include <string.h>
 #include <string>
 
-#include "mcp/agent_guide.h"
+#include "guide/agent_guide.h"
 
 namespace {
 	// Collect the pieces of the guide into a string
@@ -39,17 +39,14 @@ void tearDown() {}
 void test_fills_in_the_address() {
 	const std::string guide = buildGuide("192.168.1.42");
 	TEST_ASSERT_EQUAL_UINT(0, countOccurrences(guide, "{host}"));
-	TEST_ASSERT_NOT_EQUAL(std::string::npos, guide.find("http://192.168.1.42/mcp"));
-	TEST_ASSERT_NOT_EQUAL(std::string::npos, guide.find("claude mcp add --transport http gizmo-sky-radar http://192.168.1.42/mcp"));
 	TEST_ASSERT_NOT_EQUAL(std::string::npos, guide.find("curl \"http://192.168.1.42/api/aircraft\""));
 }
 
-// The guide names both tools and the plain API
-void test_describes_the_tools_and_the_api() {
+// The guide describes the API, and no longer an MCP server
+void test_describes_the_api() {
 	const std::string guide = buildGuide("gizmo-sky-radar.local");
 	TEST_ASSERT_EQUAL_UINT(0, guide.find("# Gizmo Sky Radar"));
-	TEST_ASSERT_NOT_EQUAL(std::string::npos, guide.find("`get_nearby_aircraft`"));
-	TEST_ASSERT_NOT_EQUAL(std::string::npos, guide.find("`get_radar_status`"));
+	TEST_ASSERT_EQUAL(std::string::npos, guide.find("/mcp"));
 	TEST_ASSERT_NOT_EQUAL(std::string::npos, guide.find("GET http://gizmo-sky-radar.local/api/aircraft"));
 	TEST_ASSERT_NOT_EQUAL(std::string::npos, guide.find("GET http://gizmo-sky-radar.local/api/config"));
 }
@@ -72,7 +69,7 @@ void test_prefers_markdown_only_when_asked() {
 int main() {
 	UNITY_BEGIN();
 	RUN_TEST(test_fills_in_the_address);
-	RUN_TEST(test_describes_the_tools_and_the_api);
+	RUN_TEST(test_describes_the_api);
 	RUN_TEST(test_prefers_markdown_only_when_asked);
 	return UNITY_END();
 }

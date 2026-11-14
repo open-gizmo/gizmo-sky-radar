@@ -10,8 +10,8 @@ This repository contains ESP32-S3 firmware for a live plane radar on a GC9A01 ro
 - `src/flights`: downloads the aircraft from adsb.fi in a task of its own (`flights.*`), and the hardware-free parts: the readsb JSON parser (`aircraft_parser.*`), the tracker that keeps trails and moves the aircraft on between downloads (`aircraft_tracker.*`), the download schedule with its backoff (`fetch_schedule.*`), the geography (`geo.*`) and the JSON of an aircraft for the API (`aircraft_json.*`).
 - `src/display`: the LovyanGFX driver of the GC9A01 (`panel.h`), the screens (`display.*`), the radar drawing (`radar_view.*`), the colors (`theme.*`) and the units (`units.*`, hardware-free).
 - `src/wifi`: passes the radar's names to the gizmo-common Wi-Fi setup (connection, access point fallback, captive portal) and tells the display how the connection is doing.
-- `src/mcp`: the MCP server for AI agents (`mcp_protocol.*`) and the Markdown guide for agents (`agent_guide.*`), both hardware-free.
-- `src/server`: exposes the AsyncWebServer routes for the settings, the aircraft, the MCP server, the guide for agents and the embedded assets (the Wi-Fi setup and device routes come from gizmo-common).
+- `src/guide`: the Markdown guide for AI agents (`agent_guide.*`), hardware-free.
+- `src/server`: exposes the AsyncWebServer routes for the settings, the aircraft, the guide for agents and the embedded assets (the Wi-Fi setup and device routes come from gizmo-common).
 - `src/serial`: serial debug logging helpers.
 - `src/webui`: generated assets for the embedded front-end.
 
