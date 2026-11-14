@@ -1,0 +1,154 @@
+{
+    "app": {
+        "loadError": "Si è verificato un errore durante il caricamento dei dati"
+    },
+    "common": {
+        "redirectingRadar": "Apertura del radar...",
+        "syncingDevice": "Sincronizzazione del dispositivo...",
+        "close": "Chiudi",
+        "cancel": "Annulla",
+        "errorTitle": "Errore"
+    },
+    "nav": {
+        "radar": {
+            "label": "Radar",
+            "description": "Gli aerei intorno a te, in diretta"
+        },
+        "settings": {
+            "label": "Impostazioni",
+            "description": "Posizione, raggio e display"
+        },
+        "device": {
+            "label": "Dispositivo",
+            "description": "Info del dispositivo, rete e riavvio"
+        }
+    },
+    "api": {
+        "backendErrors": {
+            "invalid_settings_field": "Una delle impostazioni non è valida. Controlla il modulo e riprova.",
+            "settings_save_failed": "Il dispositivo non è riuscito a salvare le impostazioni. Riprova.",
+            "clear_settings_failed": "Il dispositivo non è riuscito a ripristinare le impostazioni. Riprova."
+        }
+    },
+    "pages": {
+        "radar": {
+            "title": "Radar",
+            "loadErrorTitle": "Impossibile leggere il radar",
+            "loadErrorDescription": "Il dispositivo non ha risposto. Controlla che sia acceso e sulla stessa rete, poi riprova.",
+            "loadRetryAction": "Riprova",
+            "noLocationTitle": "Dov'è il tuo radar?",
+            "noLocationDescription": "Imposta la posizione che il radar osserva, e inizierà a mostrare gli aerei che le volano intorno.",
+            "noLocationAction": "Imposta la posizione",
+            "status": {
+                "loading": "Scansione del cielo...",
+                "waitingForNetwork": "In attesa del Wi-Fi per scaricare i voli.",
+                "live": "Un aereo entro {range} | {count} aerei entro {range}",
+                "clear": "Cielo libero: nessun aereo entro {range} in questo momento.",
+                "stale": "I dati dei voli hanno {minutes} min: il radar continua a riprovare.",
+                "error": "Non è stato ancora possibile scaricare i dati dei voli: il radar continua a riprovare."
+            },
+            "legendLabel": "Colori delle quote",
+            "legendGround": "A terra",
+            "detailsAction": "Dettagli",
+            "unknownType": "Tipo sconosciuto",
+            "problemTitle": "Problema con i dati dei voli",
+            "problemDescription": "Il radar non riesce a scaricare i dati dei voli in questo momento. Riprova da solo.",
+            "offlineTitle": "Il radar non risponde",
+            "offlineDescription": "Gli aerei sullo schermo potrebbero non essere aggiornati. Controlla che il dispositivo sia acceso e sulla stessa rete.",
+            "listTitle": "Aerei più vicini",
+            "listHint": "Dal più vicino. Quelli sbiaditi sono appena fuori dal raggio, segnati sul bordo del display. Dati di adsb.fi.",
+            "details": {
+                "hex": "Indirizzo ICAO {hex}",
+                "gone": "Questo aereo ha lasciato il radar.",
+                "type": "Tipo",
+                "registration": "Immatricolazione",
+                "altitude": "Quota",
+                "speed": "Velocità al suolo",
+                "verticalRate": "Velocità verticale",
+                "track": "Rotta",
+                "distance": "Distanza",
+                "squawk": "Squawk",
+                "trackerAction": "Apri sulla mappa di adsb.fi"
+            },
+            "agents": {
+                "title": "Agenti IA",
+                "mcpLabel": "Server MCP",
+                "guideLabel": "Guida per gli agenti",
+                "hint": "Gli agenti IA su questa rete possono chiedere al radar cosa sta volando qui intorno. Per aggiungerlo a Claude Code, esegui: {command}"
+            }
+        },
+        "settings": {
+            "title": "Impostazioni",
+            "loadErrorTitle": "Impossibile leggere le impostazioni",
+            "loadErrorDescription": "Il dispositivo non ha risposto. Controlla che sia acceso e sulla stessa rete, poi riprova.",
+            "loadRetryAction": "Riprova",
+            "location": {
+                "title": "Posizione",
+                "hint": "Il centro del radar, come latitudine e longitudine. In Google Maps, fai clic destro sul tuo luogo e clicca i numeri per copiarli, poi incollali qui.",
+                "coordinates": "Coordinate",
+                "coordinatesInvalid": "Inserisci la latitudine e la longitudine separate da una virgola, per esempio 45.46420, 9.19000.",
+                "name": "Nome",
+                "namePlaceholder": "Casa",
+                "nameTooLong": "Il nome della posizione è troppo lungo (fino a 24 caratteri)."
+            },
+            "radarTitle": "Radar",
+            "radarHint": "Il raggio è quello dell'anello esterno. Gli aerei appena fuori compaiono come segni sul bordo.",
+            "range": {
+                "label": "Raggio",
+                "note": "Quanto lontano guarda il radar intorno alla sua posizione.",
+                "hint5": "Il tuo quartiere: voli bassi ed elicotteri",
+                "hint10": "La tua città",
+                "hint20": "Decolli e atterraggi nei dintorni",
+                "hint40": "Il predefinito: una bella fetta di cielo",
+                "hint80": "Un'intera regione",
+                "hint150": "Tutto intorno: affollato vicino ai grandi aeroporti"
+            },
+            "units": {
+                "label": "Unità",
+                "aviation": "Aeronautiche",
+                "aviationMeta": "Miglia nautiche, piedi, livelli di volo e nodi",
+                "metric": "Metriche",
+                "metricMeta": "Chilometri, metri e km/h",
+                "imperial": "Imperiali",
+                "imperialMeta": "Miglia, piedi e mph"
+            },
+            "groundTraffic": "Aerei a terra",
+            "displayTitle": "Display",
+            "displayHint": "Le modifiche compaiono sul display appena salvi.",
+            "theme": {
+                "label": "Tema",
+                "phosphor": "Fosfori",
+                "phosphorMeta": "Verde, come un vecchio tubo radar",
+                "amber": "Ambra",
+                "amberMeta": "Arancione caldo, come uno schermo ambra",
+                "arctic": "Artico",
+                "arcticMeta": "Ciano e bianco su blu profondo"
+            },
+            "brightness": "Luminosità",
+            "rotation": {
+                "label": "Rotazione",
+                "note": "Ruota l'immagine per adattarla a come il display sta nella custodia.",
+                "option0": "Come è fatto il display",
+                "option1": "Un quarto di giro in senso orario",
+                "option2": "Capovolta",
+                "option3": "Un quarto di giro in senso antiorario"
+            },
+            "sweep": "Fascio del radar",
+            "labels": "Nominativi e quote",
+            "trails": "Scie",
+            "saveAction": "Salva impostazioni",
+            "saveSuccessTitle": "Impostazioni salvate",
+            "saveSuccess": "Il radar sta usando le nuove impostazioni.",
+            "saveError": "Si è verificato un errore durante il salvataggio delle impostazioni"
+        },
+        "device": {
+            "title": "Dispositivo",
+            "resetAction": "Ripristina tutte le impostazioni",
+            "resetConfirmTitle": "Ripristinare tutte le impostazioni?",
+            "resetConfirmMessage": "Il radar dimenticherà la posizione, le impostazioni e la rete Wi-Fi, poi si riavvierà con l'hotspot di configurazione.",
+            "resetInfoTitle": "Ripristino in corso",
+            "resetInfoMessage": "Il radar ha dimenticato le impostazioni e si sta riavviando con l'hotspot di configurazione. Collegati all'hotspot per configurarlo di nuovo.",
+            "resetError": "Si è verificato un errore durante il ripristino delle impostazioni"
+        }
+    }
+}

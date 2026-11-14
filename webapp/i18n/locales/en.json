@@ -1,0 +1,154 @@
+{
+    "app": {
+        "loadError": "An error occurred while loading the data"
+    },
+    "common": {
+        "redirectingRadar": "Opening the radar...",
+        "syncingDevice": "Syncing device...",
+        "close": "Close",
+        "cancel": "Cancel",
+        "errorTitle": "Error"
+    },
+    "nav": {
+        "radar": {
+            "label": "Radar",
+            "description": "The aircraft around you, live"
+        },
+        "settings": {
+            "label": "Settings",
+            "description": "Location, range and display"
+        },
+        "device": {
+            "label": "Device",
+            "description": "Device info, network and restart"
+        }
+    },
+    "api": {
+        "backendErrors": {
+            "invalid_settings_field": "One of the settings is not valid. Check the form and try again.",
+            "settings_save_failed": "The device couldn't save the settings. Please try again.",
+            "clear_settings_failed": "The device couldn't reset its settings. Please try again."
+        }
+    },
+    "pages": {
+        "radar": {
+            "title": "Radar",
+            "loadErrorTitle": "Couldn't read the radar",
+            "loadErrorDescription": "The device didn't answer. Check that it's on and on the same network, then try again.",
+            "loadRetryAction": "Try again",
+            "noLocationTitle": "Where is your radar?",
+            "noLocationDescription": "Set the location the radar watches, and it starts showing the aircraft flying around it.",
+            "noLocationAction": "Set the location",
+            "status": {
+                "loading": "Scanning the sky...",
+                "waitingForNetwork": "Waiting for the Wi-Fi to download the flights.",
+                "live": "One aircraft within {range} | {count} aircraft within {range}",
+                "clear": "Clear sky: no aircraft within {range} right now.",
+                "stale": "The flight data is {minutes} min old: the radar keeps trying.",
+                "error": "The flight data couldn't be downloaded yet: the radar keeps trying."
+            },
+            "legendLabel": "Colors of the altitudes",
+            "legendGround": "Ground",
+            "detailsAction": "Details",
+            "unknownType": "Unknown type",
+            "problemTitle": "Flight data problem",
+            "problemDescription": "The radar can't download the flight data right now. It retries by itself.",
+            "offlineTitle": "The radar doesn't answer",
+            "offlineDescription": "The aircraft on screen may be old. Check that the device is on and on the same network.",
+            "listTitle": "Nearest aircraft",
+            "listHint": "Nearest first. The faded ones are just outside the range, shown on the edge of the display. Data from adsb.fi.",
+            "details": {
+                "hex": "ICAO address {hex}",
+                "gone": "This aircraft has left the radar.",
+                "type": "Type",
+                "registration": "Registration",
+                "altitude": "Altitude",
+                "speed": "Ground speed",
+                "verticalRate": "Vertical rate",
+                "track": "Track",
+                "distance": "Distance",
+                "squawk": "Squawk",
+                "trackerAction": "Open on the adsb.fi map"
+            },
+            "agents": {
+                "title": "AI agents",
+                "mcpLabel": "MCP server",
+                "guideLabel": "Guide for agents",
+                "hint": "AI agents on this network can ask the radar what is flying around. To add it to Claude Code, run: {command}"
+            }
+        },
+        "settings": {
+            "title": "Settings",
+            "loadErrorTitle": "Couldn't read the settings",
+            "loadErrorDescription": "The device didn't answer. Check that it's on and on the same network, then try again.",
+            "loadRetryAction": "Try again",
+            "location": {
+                "title": "Location",
+                "hint": "The center of the radar, as latitude and longitude. In Google Maps, right-click your place and click the numbers to copy them, then paste them here.",
+                "coordinates": "Coordinates",
+                "coordinatesInvalid": "Enter the latitude and the longitude separated by a comma, for example 45.46420, 9.19000.",
+                "name": "Name",
+                "namePlaceholder": "Home",
+                "nameTooLong": "The name of the location is too long (up to 24 characters)."
+            },
+            "radarTitle": "Radar",
+            "radarHint": "The range is the radius of the outer ring. Aircraft just outside it show as marks on the edge.",
+            "range": {
+                "label": "Range",
+                "note": "How far the radar looks around its location.",
+                "hint5": "Your neighborhood: low flights and helicopters",
+                "hint10": "Your town",
+                "hint20": "Departures and arrivals nearby",
+                "hint40": "The default: a busy slice of sky",
+                "hint80": "A whole region",
+                "hint150": "Everything around: crowded near big airports"
+            },
+            "units": {
+                "label": "Units",
+                "aviation": "Aviation",
+                "aviationMeta": "Nautical miles, feet, flight levels and knots",
+                "metric": "Metric",
+                "metricMeta": "Kilometers, meters and km/h",
+                "imperial": "Imperial",
+                "imperialMeta": "Miles, feet and mph"
+            },
+            "groundTraffic": "Aircraft on the ground",
+            "displayTitle": "Display",
+            "displayHint": "Changes show on the display as soon as you save.",
+            "theme": {
+                "label": "Theme",
+                "phosphor": "Phosphor",
+                "phosphorMeta": "Green, like an old radar tube",
+                "amber": "Amber",
+                "amberMeta": "Warm orange, like an amber screen",
+                "arctic": "Arctic",
+                "arcticMeta": "Cyan and white on deep blue"
+            },
+            "brightness": "Brightness",
+            "rotation": {
+                "label": "Rotation",
+                "note": "Turn the picture to match how the display sits in its case.",
+                "option0": "As the display is made",
+                "option1": "A quarter turn clockwise",
+                "option2": "Upside down",
+                "option3": "A quarter turn counterclockwise"
+            },
+            "sweep": "Radar beam",
+            "labels": "Callsigns and altitudes",
+            "trails": "Trails",
+            "saveAction": "Save settings",
+            "saveSuccessTitle": "Settings saved",
+            "saveSuccess": "The radar is using the new settings.",
+            "saveError": "An error occurred while saving the settings"
+        },
+        "device": {
+            "title": "Device",
+            "resetAction": "Reset all settings",
+            "resetConfirmTitle": "Reset all settings?",
+            "resetConfirmMessage": "The radar will forget its location, its settings and its Wi-Fi network, then restart into its setup hotspot.",
+            "resetInfoTitle": "Resetting",
+            "resetInfoMessage": "The radar forgot its settings and is restarting into its setup hotspot. Join the hotspot to set it up again.",
+            "resetError": "An error occurred while resetting the settings"
+        }
+    }
+}

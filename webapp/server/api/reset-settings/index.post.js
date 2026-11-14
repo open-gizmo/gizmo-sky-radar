@@ -1,0 +1,12 @@
+import { createSuccessResponse, handleEspMockError } from 'gizmo-common/web/server/utils/gizmo-mock.js';
+import { resetEspMockState } from '~~/server/utils/esp-mock-state.js';
+
+export default defineEventHandler(async event => {
+    try {
+        // Clear the settings and the saved network (the device then restarts with its hotspot open)
+        resetEspMockState();
+        return createSuccessResponse();
+    } catch (error) {
+        return handleEspMockError({ event, error, errorId: 'clear_settings_failed', errorMessage: 'Failed to clear the settings' });
+    }
+});
