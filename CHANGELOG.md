@@ -4,6 +4,8 @@ What changed in each release. New notes go under **Unreleased** while the work i
 
 ## Unreleased
 
+## v1.0.0 - 2026-11-14
+
 The first release of Gizmo Sky Radar: a live plane radar on a round display, for your desk.
 
 - A radar on the 240 × 240 GC9A01 round display at about 25 frames a second: range rings, a compass, and a sweeping beam that makes the aircraft glow as it passes.
