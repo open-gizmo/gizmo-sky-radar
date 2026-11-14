@@ -93,8 +93,8 @@ void test_applies_the_settings() {
 	JsonDocument doc = parse("{\"latitude\":45.4642,\"longitude\":9.19,\"locationName\":\"Milano\",\"rangeKm\":80,\"units\":\"imperial\",\"theme\":\"arctic\",\"brightness\":30,\"rotation\":2,\"showTrails\":false,\"showGroundTraffic\":true}");
 	applySettingsFromJson(doc.as<JsonObjectConst>(), settings);
 	TEST_ASSERT_TRUE(settings.hasLocation);
-	TEST_ASSERT_EQUAL_DOUBLE(45.4642, settings.latitude);
-	TEST_ASSERT_EQUAL_DOUBLE(9.19, settings.longitude);
+	TEST_ASSERT_DOUBLE_WITHIN(0.00001, 45.4642, settings.latitude); // ArduinoJson parses short decimals as float: within about a metre
+	TEST_ASSERT_DOUBLE_WITHIN(0.00001, 9.19, settings.longitude); // ArduinoJson parses short decimals as float: within about a metre
 	TEST_ASSERT_EQUAL_STRING("Milano", settings.locationName);
 	TEST_ASSERT_EQUAL_UINT16(80, settings.rangeKm);
 	TEST_ASSERT_EQUAL(UnitSystem::Imperial, settings.units);
@@ -115,7 +115,7 @@ void test_keeps_missing_fields() {
 	JsonDocument doc = parse("{\"brightness\":60}");
 	applySettingsFromJson(doc.as<JsonObjectConst>(), settings);
 	TEST_ASSERT_TRUE(settings.hasLocation);
-	TEST_ASSERT_EQUAL_DOUBLE(1.5, settings.latitude);
+	TEST_ASSERT_DOUBLE_WITHIN(0.00001, 1.5, settings.latitude); // ArduinoJson parses short decimals as float: within about a metre
 	TEST_ASSERT_EQUAL_UINT8(60, settings.brightness);
 }
 
@@ -138,7 +138,7 @@ void test_writes_the_settings() {
 	settings.units = UnitSystem::Metric;
 	doc.clear();
 	writeSettingsToJson(doc.to<JsonObject>(), settings);
-	TEST_ASSERT_EQUAL_DOUBLE(-33.8688, doc["latitude"].as<double>());
+	TEST_ASSERT_DOUBLE_WITHIN(0.00001, -33.8688, doc["latitude"].as<double>()); // ArduinoJson parses short decimals as float: within about a metre
 	TEST_ASSERT_EQUAL_STRING("metric", doc["units"]);
 }
 
@@ -159,7 +159,7 @@ void test_round_trips_through_json() {
 	TEST_ASSERT_EQUAL_STRING("Heathrow", copy.locationName);
 	TEST_ASSERT_EQUAL(RadarTheme::Amber, copy.theme);
 	TEST_ASSERT_EQUAL_UINT8(1, copy.rotation);
-	TEST_ASSERT_EQUAL_DOUBLE(-0.4543, copy.longitude);
+	TEST_ASSERT_DOUBLE_WITHIN(0.00001, -0.4543, copy.longitude); // ArduinoJson parses short decimals as float: within about a metre
 }
 
 // Run the tests
