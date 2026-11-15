@@ -25,7 +25,7 @@ void setupSettingsPostRoute() {
 		const RadarSettings previous = getRadarSettings();
 		RadarSettings settings = previous;
 		applySettingsFromJson(doc.as<JsonObjectConst>(), settings);
-		if (!saveRadarSettings(settings)) {
+		if (!saveSettings(settings)) {
 			sendErrorResponse(request, 500, "settings_save_failed", "Failed to save the settings");
 			return;
 		}

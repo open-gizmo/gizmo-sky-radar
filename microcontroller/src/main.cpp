@@ -18,7 +18,7 @@ void setup() {
 	gizmo::FactoryResetOptions resetOptions;
 	resetOptions.clearSettings = [] {
 		showFactoryResetDone();
-		clearSavedRadarSettings();
+		clearSettings();
 	};
 	resetOptions.onHold = showFactoryResetCountdown;
 	resetOptions.onCancel = hideFactoryResetCountdown;

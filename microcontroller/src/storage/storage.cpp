@@ -75,7 +75,7 @@ void setupStorage() {
 }
 
 // Save the settings (NVS skips the values that didn't change)
-bool saveRadarSettings(const RadarSettings &settings) {
+bool saveSettings(const RadarSettings &settings) {
 	Preferences preferences;
 	if (!preferences.begin(STORAGE_NAMESPACE, false)) {
 		return false;
@@ -104,7 +104,7 @@ bool saveRadarSettings(const RadarSettings &settings) {
 }
 
 // Forget the saved settings
-bool clearSavedRadarSettings() {
+bool clearSettings() {
 	Preferences preferences;
 	if (!preferences.begin(STORAGE_NAMESPACE, false)) {
 		return false;

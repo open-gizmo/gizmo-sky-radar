@@ -7,9 +7,9 @@
 void setupStorage();
 
 // Save the settings (false when the flash couldn't be written)
-bool saveRadarSettings(const RadarSettings &settings);
+bool saveSettings(const RadarSettings &settings);
 
 // Forget the saved settings (the defaults apply after the next boot)
-bool clearSavedRadarSettings();
+bool clearSettings();
 
 #endif

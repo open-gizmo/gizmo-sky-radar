@@ -14,7 +14,7 @@ void setupResetSettingsPostRoute() {
 		}
 
 		// Clear the settings and the saved network
-		const bool isSettingsCleared = clearSavedRadarSettings();
+		const bool isSettingsCleared = clearSettings();
 		const bool isWifiCleared = gizmo::clearWifiCredentials();
 		if (!isSettingsCleared || !isWifiCleared) {
 			sendErrorResponse(request, 500, "clear_settings_failed", "Failed to clear the settings");
