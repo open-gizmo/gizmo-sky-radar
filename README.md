@@ -7,6 +7,10 @@
 Gizmo Sky Radar is a two-part project that turns a Seeed Studio XIAO ESP32-S3 and a GC9A01 round display into a little radar screen that shows the aircraft flying around your home, live: ESP32 firmware that downloads the flight data from adsb.fi and draws it on the display, and a Nuxt 4 web app, built into the firmware, to set it up and watch the sky from your phone.
 
 <p>
+  <a href="https://opengizmo.dev/projects/gizmo-sky-radar"><img alt="The Gizmo Sky Radar in its white and orange printed enclosure, leaning back on its skids with the radar lit on its round screen, and pulled apart into the shell, the round display, the XIAO ESP32-S3, the back plate and four M3 screws" src="docs/enclosure-render.webp" width="800"></a>
+</p>
+
+<p>
   <a href="https://github.com/open-gizmo/gizmo-sky-radar"><img alt="GitHub Repo" src="https://img.shields.io/badge/github-open--gizmo%2Fgizmo--sky--radar-111111?logo=github"></a>
   <img alt="ESP32-S3" src="https://img.shields.io/badge/esp32-ESP32--S3-E7352C?logo=espressif&logoColor=white">
   <img alt="PlatformIO" src="https://img.shields.io/badge/platformio-PlatformIO-FF6B35?logo=platformio&logoColor=white">
@@ -19,6 +23,7 @@ Gizmo Sky Radar is a two-part project that turns a Seeed Studio XIAO ESP32-S3 an
 </p>
 
 <p>
+	<a href="#enclosure"><strong>Enclosure</strong></a> •
 	<a href="#overview"><strong>Overview</strong></a> •
 	<a href="#images"><strong>Images</strong></a> •
 	<a href="#features"><strong>Features</strong></a> •
@@ -31,6 +36,16 @@ Gizmo Sky Radar is a two-part project that turns a Seeed Studio XIAO ESP32-S3 an
 	<a href="#license"><strong>License</strong></a>
 </p>
 
+</div>
+
+<a id="enclosure"></a>
+## 📐 Enclosure
+
+<div align="center">
+	<img src="docs/enclosure-blueprint.webp" alt="A blueprint of the Gizmo Sky Radar enclosure, with a callout for each detail" width="800">
+	<p>
+		<sub>The two-color printed enclosure: a round white shell that leans back 15° on two skids, and an orange back plate with the antenna mast, closed by four M3 screws</sub>
+	</p>
 </div>
 
 <a id="overview"></a>
