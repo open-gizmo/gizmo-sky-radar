@@ -4,6 +4,8 @@ What changed in each release. New notes go under **Unreleased** while the work i
 
 ## Unreleased
 
+- gizmo-common v2.6.0: the Wi-Fi setup page can no longer report a wrong password by mistake right after you send one, and the Wi-Fi status stops saying "connected" as soon as the network drops. Flash the new firmware to get it.
+
 ## v1.0.0 - 2026-11-14
 
 The first release of Gizmo Sky Radar: a live plane radar on a round display, for your desk.
