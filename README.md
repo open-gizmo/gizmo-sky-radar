@@ -7,7 +7,7 @@
 Gizmo Sky Radar is a two-part project that turns a Seeed Studio XIAO ESP32-S3 and a GC9A01 round display into a little radar screen that shows the aircraft flying around your home, live: ESP32 firmware that downloads the flight data from adsb.fi and draws it on the display, and a Nuxt 4 web app, built into the firmware, to set it up and watch the sky from your phone.
 
 <p>
-  <a href="https://opengizmo.dev/projects/gizmo-sky-radar"><img alt="The Gizmo Sky Radar in its white and orange printed enclosure, leaning back on its skids with the radar lit on its round screen, and pulled apart into the shell, the round display, the XIAO ESP32-S3, the back plate and four M3 screws" src="docs/enclosure-render.webp" width="800"></a>
+  <a href="https://opengizmo.dev/projects/gizmo-sky-radar"><img alt="The Gizmo Sky Radar in its white and orange printed enclosure, leaning back on its skids with the radar lit on its round screen and its antenna up, and pulled apart into the shell, the round display, the XIAO ESP32-S3, the back plate, four M3 screws and the antenna" src="docs/enclosure-render.webp" width="800"></a>
 </p>
 
 <p>
