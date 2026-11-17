@@ -194,6 +194,8 @@ The firmware targets the **Seeed Studio XIAO ESP32-S3** (PlatformIO board `seeed
 Besides the board, the radar needs:
 
 - **GC9A01 round display**, 1.28", 240 × 240, with an SPI interface (the common module with VCC, GND, DIN, CLK, CS, DC, RST and BL pins).
+- **U.FL to RP-SMA bulkhead pigtail**, from the U.FL connector of the XIAO to the antenna mast: its jack goes through the back plate of the enclosure (a 6.8 mm hole, held by a nut 8 mm across flats).
+- **2.4 GHz RP-SMA antenna**, screwed onto the mast. It replaces the flat antenna that comes with the XIAO.
 
 ### Pinout
 
