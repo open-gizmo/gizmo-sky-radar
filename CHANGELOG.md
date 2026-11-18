@@ -4,6 +4,8 @@ What changed in each release. New notes go under **Unreleased** while the work i
 
 ## Unreleased
 
+## v1.0.1 - 2026-11-18
+
 - gizmo-common v2.6.0: the Wi-Fi setup page can no longer report a wrong password by mistake right after you send one, and the Wi-Fi status stops saying "connected" as soon as the network drops. Flash the new firmware to get it.
 - The parts list now has the antenna of the printed enclosure: a U.FL to RP-SMA bulkhead pigtail and a 2.4 GHz RP-SMA antenna, which goes on the mast in the back plate instead of the flat antenna that comes with the XIAO.
 
