@@ -4,6 +4,8 @@ What changed in each release. New notes go under **Unreleased** while the work i
 
 ## Unreleased
 
+- gizmo-common v2.7.0: when the device sends an answer the web app can't read, it now shows an error ("The device sent an answer the app could not read.") instead of carrying on with empty values. Flash the new firmware to get it.
+
 ## v1.0.1 - 2026-11-18
 
 - gizmo-common v2.6.0: the Wi-Fi setup page can no longer report a wrong password by mistake right after you send one, and the Wi-Fi status stops saying "connected" as soon as the network drops. Flash the new firmware to get it.

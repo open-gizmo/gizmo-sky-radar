@@ -3,7 +3,7 @@
 // Fetch the settings of the radar
 export const getConfig = async () => {
     const response = await fetchEsp('/api/config');
-    return response.data || {};
+    return readData(response);
 };
 
 // Save settings of the radar (only the fields sent change), and return the settings the device saved
@@ -12,7 +12,7 @@ export const saveSettings = async settings => {
         method: 'POST',
         body: settings
     });
-    return response.data || {};
+    return readData(response);
 };
 
 // Forget the settings and the saved network, then restart the device into its setup hotspot
@@ -24,5 +24,5 @@ export const resetSettings = async () => {
 // Fetch the aircraft around the radar, nearest first, with the state of the flight data
 export const getAircraft = async () => {
     const response = await fetchEsp('/api/aircraft', { retry: 0 });
-    return response.data || {};
+    return readData(response);
 };
