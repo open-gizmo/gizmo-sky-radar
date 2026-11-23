@@ -72,12 +72,12 @@ The web app built into the firmware shows the same radar, live, with the list of
 				<img src="docs/screenshot-settings.png" alt="Settings screen" width="180">
 			</td>
 			<td align="center" valign="top">
-				<img src="docs/screenshot-wifi.png" alt="WiFi setup screen" width="180">
+				<img src="docs/screenshot-wifi.png" alt="Wi-Fi setup screen" width="180">
 			</td>
 		</tr>
 	</table>
 	<p>
-		<sub>Radar, settings, and WiFi setup screens (the web app's development server, with a simulated sky over Milan)</sub>
+		<sub>Radar, settings, and Wi-Fi setup screens (the web app's development server, with a simulated sky over Milan)</sub>
 	</p>
 </div>
 

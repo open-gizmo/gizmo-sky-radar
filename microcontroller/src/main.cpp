@@ -24,7 +24,7 @@ void setup() {
 	resetOptions.onCancel = hideFactoryResetCountdown;
 	gizmo::setupFactoryReset(resetOptions);
 
-	manageWiFiConnection(); // Manage the WiFi connection
+	manageWiFiConnection(); // Manage the Wi-Fi connection
 	setupFlights(); // Start downloading the flight data, in a task of its own
 }
 
@@ -33,7 +33,7 @@ void loop() {
 	// Restart the device if the web server asked for it, and watch the BOOT button
 	gizmo::manageDevice();
 
-	// Manage the WiFi connection
+	// Manage the Wi-Fi connection
 	manageWiFiConnection();
 
 	// Draw the next frame of the display
