@@ -1,6 +1,6 @@
 {
 	"name": "gizmo-sky-radar",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Gizmo Sky Radar web app, the device configuration UI embedded in the ESP32 firmware.",
 	"homepage": "https://github.com/open-gizmo/gizmo-sky-radar",
 	"bugs": {
