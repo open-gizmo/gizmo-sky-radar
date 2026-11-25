@@ -25,7 +25,7 @@ describe('pages of the layer', () => {
             ['radar', 'Radar', '/radar'],
             ['settings', 'Settings', '/settings'],
             ['device', 'Device', '/device'],
-            ['wifi', 'WiFi', '/wifi']
+            ['wifi', 'Wi-Fi', '/wifi']
         ]);
     });
 
